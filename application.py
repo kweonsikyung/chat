@@ -7,7 +7,7 @@ from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
-
+from starlette.staticfiles import StaticFiles
 
 load_dotenv()  # Load .env variables
 
@@ -71,3 +71,5 @@ application = Starlette(
     on_shutdown=[broadcast.disconnect],
     middleware=middleware
 )
+
+application.mount("/static", StaticFiles(directory="static"), name="static")
